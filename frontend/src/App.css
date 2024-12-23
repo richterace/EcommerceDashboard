@@ -37,6 +37,27 @@
   margin: 0;
 }
 
+.register {
+  margin-left: 30%;
+}
+
+.SignButton {
+  margin: 20px;
+  width: 150px;
+  padding: 10px;
+  background-color: skyblue;
+  border: 1px solid;
+  cursor: pointer;
+}
+
+.inputBox {
+  padding: 7px;
+  display: block;
+  border: 1px solid;
+  width: 300px;
+  margin: 20px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
