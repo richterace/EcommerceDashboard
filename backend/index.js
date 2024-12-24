@@ -1,15 +1,17 @@
 const express = require("express");
-const mongoose = require('mongoose');
+require("./db/config");
+const User = require("./db/User");
 const app = express();
-const connectDB = async () => {
-    mongoose.connect("mongodb://localhost:27017//e-comm") // initiate the host
-    const productSchema = new mongoose.Schema({}); // initialize the productschema
-    const product = mongoose.model("products", productSchema); //our collection name
-    const data = await product.find(); // we can only use await inside async function
-    console.warn(data);
-}
 
-connectDB();
 
+app.use(express.json()); // to get data
+
+app.post("/register", async (req, resp) => {
+    let user = new User(req.body);
+    let result = await user.save();
+    console.log("Request Body:", req.body);
+    resp.send(result) // to check in postman if its working properly by sending specifics in body
+});  //two parameters this is coming from express for api, accepts path
 
 app.listen(5000);
+
