@@ -5,8 +5,17 @@ const SignUp = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const collectData = () => {
+    const collectData = async () => {
         console.warn(name, email, password);
+        let result = await fetch("http://localhost:5000/register", {
+            method: 'post',
+            body: JSON.stringify({ name, email, password }), // we need to change and use json.stringify when usiong mongodb
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        result = await result.json();
+        console.warn(result);
     }
 
     return (
