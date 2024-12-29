@@ -21,6 +21,20 @@
   padding: 5px;
 }
 
+.nav-right {
+  text-align: right;
+}
+
+.logo {
+  margin-top: 3px;
+  margin-left: 10px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  float: left;
+  /* responsible for making it above the texts */
+}
+
 .footer {
   position: fixed;
   /* Sticks the footer to the bottom of the viewport */

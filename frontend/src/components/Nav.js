@@ -10,19 +10,30 @@ const Nav = () => {
     }
     return (
         <div>
-            <ul class="nav-ul">
-                <li><Link to="/">Products</Link></li>
-                <li><Link to="/add"> Add Products</Link></li>
-                <li><Link to="/update">Update Products</Link></li>
-                <li><Link to="/profile">Profile</Link></li>
-                {/* <li>{auth ? <Link onClick={logout} to="/signup">Logout</Link> : <Link to="/signup">Sign Up</Link>}</li>
-                <li><Link to="/login">Login</Link></li> */}
-                {
-                    auth ? <Link onClick={logout} to="/signup">Logout</Link> : <><li><Link to="/signup">Sign Up</Link> </li>
-                        <li><Link to="/login">Login</Link></li></>
-                }
-            </ul>
-        </div>
+            <img
+                alt='logo'
+                className='logo'
+                src="https://img.freepik.com/free-vector/hand-drawn-flat-design-japan-food-illustration_23-2149297535.jpg?semt=ais_hybrid"></img>
+            {
+                auth ?
+
+                    <ul className="nav-ul">
+
+                        <li><Link to="/">Products</Link></li>
+                        <li><Link to="/add"> Add Products</Link></li>
+                        <li><Link to="/update">Update Products</Link></li>
+                        <li><Link to="/profile">Profile</Link></li>
+                        <li> <Link onClick={logout} to="/signup">Logout({JSON.parse(auth).name})</Link></li>
+                    </ul>
+                    :
+                    <ul className="nav-ul nav-right" >
+                        <li><Link to="/signup">Sign Up</Link> </li>
+                        <li><Link to="/login">Login</Link></li>
+                    </ul>
+            }
+
+        </div >
+
     )
 }
 
