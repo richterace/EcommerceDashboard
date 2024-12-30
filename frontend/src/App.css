@@ -52,7 +52,8 @@
 }
 
 .register,
-.product {
+.product,
+.UpdateProduct {
   margin-left: 30%;
 }
 
@@ -63,7 +64,8 @@
 
 .SignButton,
 .LoginButton,
-.ProductButton {
+.ProductButton,
+.UpdateButton {
   margin: 20px;
   width: 150px;
   padding: 10px;
