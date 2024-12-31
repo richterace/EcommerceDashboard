@@ -6,11 +6,17 @@ const AddProduct = () => {
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('');
     const [company, setCompany] = useState('');
+    const [error, setError] = useState(false);
     // button to handle the passed inputs from useState
-    const AddProduct = async () => {
+    const addProduct = async () => {
         console.warn(name)
         const userId = JSON.parse(localStorage.getItem('user'))._id;
         console.warn(userId)
+
+        if (!name || !price || !category || !company) {
+            setError(true);
+            return false
+        }
 
         let result = await fetch("http://localhost:5000/add-product", {
             method: "post",
@@ -29,20 +35,24 @@ const AddProduct = () => {
             <input className="inputBox" type="text" placeholder="Enter product name"
                 onChange={(e) => { setName(e.target.value) }} value={name}
             />
+            {error && !name && <span className="invalidInput">Enter valid name</span>}
 
             <input className="inputBox" type="text" placeholder="Enter product price"
                 onChange={(e) => { setPrice(e.target.value) }} value={price}
             />
+            {error && !price && <span className="invalidInput">Enter valid price</span>}
 
             <input className="inputBox" type="text" placeholder="Enter product category"
                 onChange={(e) => { setCategory(e.target.value) }} value={category}
             />
+            {error && !category && <span className="invalidInput">Enter valid category</span>}
 
             <input className="inputBox" type="text" placeholder="Enter product company"
                 onChange={(e) => { setCompany(e.target.value) }} value={company}
             />
+            {error && !company && <span className="invalidInput">Enter valid company</span>}
 
-            <button onClick={AddProduct} className="ProductButton">Add Product</button>
+            <button onClick={addProduct} className="ProductButton">Add Product</button>
         </div>
     )
 };
