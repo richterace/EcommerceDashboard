@@ -91,6 +91,21 @@
   margin-left: 20px;
 }
 
+.prodList {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.prodList ul {
+  margin: 0;
+}
+
+.prodList ul li {
+  display: inline-block;
+  width: 150px;
+  border: 1px solid skyblue;
+  padding: 5px;
+}
 
 
 /* @media (prefers-reduced-motion: no-preference) {
