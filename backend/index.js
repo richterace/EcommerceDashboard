@@ -44,5 +44,17 @@ app.post("/add-product", async (req, resp) => {
 
 })
 
+
+app.get("/products", async (req, resp) => {
+    const products = await Product.find().select("-_id -userId"); // find method will prodive all data from that table, select method to specify the variables
+
+    // simply means we have some data in it
+    if (products.length > 0) {
+        resp.send(products) // return the data from it
+    } else {
+        resp.send({ result: "No product found" }) // prompt there's none in that
+    }
+})  //this function will return a promise so we need to use async and await
+
 app.listen(5000);
 
