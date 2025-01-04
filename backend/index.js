@@ -56,5 +56,11 @@ app.get("/products", async (req, resp) => {
     }
 })  //this function will return a promise so we need to use async and await
 
+
+app.delete("/product/:id", async (req,resp)=>{
+    let result = await Product.deleteOne({_id:req.params.id}) // delete the id spcified
+    resp.send(result)
+})
+
 app.listen(5000);
 
