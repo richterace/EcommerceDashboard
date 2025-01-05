@@ -46,7 +46,7 @@ app.post("/add-product", async (req, resp) => {
 
 
 app.get("/products", async (req, resp) => {
-    const products = await Product.find().select("-_id -userId"); // find method will prodive all data from that table, select method to specify the variables
+    const products = await Product.find().select("-userId"); // find method will prodive all data from that table, select method to specify the variables
 
     // simply means we have some data in it
     if (products.length > 0) {

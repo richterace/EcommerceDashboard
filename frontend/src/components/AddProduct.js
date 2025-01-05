@@ -27,6 +27,13 @@ const AddProduct = () => {
         });
         result = await result.json();
         console.warn(result)
+        alert("Product Added")
+       // Reset input fields after successful product addition
+       setName('');
+       setPrice('');
+       setCategory('');
+       setCompany('');
+       setError(false);
 
     }
     return (
