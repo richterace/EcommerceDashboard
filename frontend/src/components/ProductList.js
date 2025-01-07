@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
 
 const ProductList = () => {
 
@@ -19,13 +20,13 @@ const ProductList = () => {
 
     console.warn(product);
 
-    const deleteProduct= async (id)=>{
+    const deleteProduct = async (id) => {
         console.warn(id)
-        let result = await fetch(`http://localhost:5000/product/${id}`,{
+        let result = await fetch(`http://localhost:5000/product/${id}`, {
             method: "Delete"
         });
         result = await result.json();
-        if(result){
+        if (result) {
             alert("Product Deleted")
             getProducts();
         }
@@ -51,7 +52,9 @@ const ProductList = () => {
                             <li>{items.price}</li>
                             <li>{items.category}</li>
                             <li>{items.company}</li>
-                            <li><button onClick={()=>deleteProduct(items._id)}>Delete</button></li>
+                            <li><button onClick={() => deleteProduct(items._id)}>Delete</button>
+                                <Link to={"/update/" + items._id} >  Update</Link>
+                            </li>
                         </ul>)
                 }
             </h3>
