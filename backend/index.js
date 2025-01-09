@@ -73,5 +73,14 @@ app.get("/product/:id", async (req, resp) => {
     }
 })
 
+// new route for api to update the product
+app.put("/product/:id", async (req, resp) => {
+    let result = await Product.updateOne(
+        { _id: req.params.id },
+        { $set: req.body }
+    ) // when we are updating, we use this updateOne method and having its two parameters, first is the data then what we want to update the data is the 2nd object
+    resp.send(result)
+})
+
 app.listen(5000);
 

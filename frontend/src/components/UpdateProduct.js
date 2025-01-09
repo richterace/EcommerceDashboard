@@ -29,8 +29,9 @@ const UpdateProduct = () => {
                 onChange={(e) => { updateCompany(e.target.value) }} value={company}
             />
 
-            <button className="UpdateButton" onClick={UpdateProduct}> Update</button>
-        </div>
+            <button className="UpdateButton" onClick={() => UpdateProduct()}> Update</button>
+
+        </div >
     )
 }
 
