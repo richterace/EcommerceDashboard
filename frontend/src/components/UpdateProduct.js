@@ -1,16 +1,43 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
 
 const UpdateProduct = () => {
     const [name, updateName] = useState();
     const [price, updatePrice] = useState();
     const [category, updateCategory] = useState();
     const [company, updateCompany] = useState();
+    const params = useParams();
 
-    const UpdateProduct = () => {
+    useEffect(() => {
+        const getProductDetails = async () => {
+            console.warn(params);
+            let result = await fetch(`http://localhost:5000/product/${params.id}`);
+            result = await result.json();
+            console.warn(result);
+            updateName(result.name);
+            updatePrice(result.price);
+            updateCategory(result.category);
+            updateCompany(result.company);
+        };
+        getProductDetails();
+    }, [params]);
+
+
+
+    const updateProduct = async () => {
         console.warn(name, price, category, company)
-    }
 
+        let result = await fetch(`http://localhost:5000/product/${params.id}`, {
+            method: "Put",
+            body: JSON.stringify({ name, price, category, company }),
+            headers: {
+                'Content-Type': 'Application/json'
+            }
+        });
+        result = await result.json();
+        console.warn(result)
+
+    }
 
     return (
         <div className="UpdateProduct">
@@ -31,7 +58,7 @@ const UpdateProduct = () => {
                 onChange={(e) => { updateCompany(e.target.value) }} value={company}
             />
 
-            <button className="UpdateButton" onClick={() => UpdateProduct()}> Update</button>
+            <button className="UpdateButton" onClick={updateProduct}> Update</button>
 
         </div >
     )
