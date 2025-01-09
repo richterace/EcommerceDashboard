@@ -4,7 +4,15 @@ import { Link } from 'react-router-dom';
 const ProductList = () => {
 
     const [product, setProducts] = useState([]);
+
     useEffect(() => {
+        const getProducts = async () => {
+
+            let result = await fetch('http://localhost:5000/products');
+            result = await result.json();
+            setProducts(result)
+
+        };
         getProducts();
     }, [])
 
