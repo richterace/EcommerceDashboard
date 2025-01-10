@@ -36,6 +36,9 @@ const UpdateProduct = () => {
         });
         result = await result.json();
         console.warn(result)
+        if (result) {
+            alert("Product Updated")
+        }
 
     }
 
