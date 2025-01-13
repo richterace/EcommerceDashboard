@@ -91,7 +91,7 @@ app.put("/product/:id", async (req, resp) => {
 });
 
 // Endpoint for searching products by a key provided in the URL parameter
-app.get("/search/:key", async (req, resp) => {
+app.get("/search/:key",verifyToken, async (req, resp) => {
     // Use the 'Product' model to search the database
     // The query uses the '$or' operator to match the 'name' field
     // The '$regex' operator performs a case-sensitive pattern match with the key
@@ -113,5 +113,29 @@ app.get("/search/:key", async (req, resp) => {
     // Send the search results back to the client as the response
     resp.send(result);
 });
+
+
+function verifyToken(req,resp,next){
+    console.warn(req.headers['authorization'])
+    let token = req.headers['authorization'];
+    if(token){
+        token = token.split(' ')[1];
+        Jwt.verify(token, jwtKey,(err, valid)=>{
+
+            if(err){
+                resp.send("Please provide a valid token")
+            }
+            else{
+                next();
+            }
+
+        })
+
+    }
+    else{
+        resp.status(403).send({result:'Please provide a token'})
+    }
+    next();
+}
 
 app.listen(5000);
