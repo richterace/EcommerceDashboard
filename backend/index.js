@@ -19,12 +19,12 @@ app.post("/register", async (req, resp) => {
     result = result.toObject();
     delete result.password;
     console.log("Request Body:", req.body);
-    Jwt.sign({result},jwtKey,{expiresIn:"2h"},(err,token)=>{
-        if(err){
-            resp.send({result:"Something went wrong, please try after some time"})
+    Jwt.sign({ result }, jwtKey, { expiresIn: "2h" }, (err, token) => {
+        if (err) {
+            resp.send({ result: "Something went wrong, please try after some time" })
         }
-        resp.send({result,auth:token}); // Send the user details if found
-    }) 
+        resp.send({ result, auth: token }); // Send the user details if found
+    })
     // resp.send(result); // to check in postman if its working properly by sending specifics in body
 }); //two parameters this is coming from express for api, accepts path
 
@@ -33,13 +33,13 @@ app.post("/login", async (req, resp) => {
     if (req.body.password && req.body.email) {
         let user = await User.findOne(req.body).select("-password");
         if (user) {
-            Jwt.sign({user},jwtKey,{expiresIn:"2h"},(err,token)=>{
-                if(err){
-                    resp.send({result:"Something went wrong, please try after some time"})
+            Jwt.sign({ user }, jwtKey, { expiresIn: "2h" }, (err, token) => {
+                if (err) {
+                    resp.send({ result: "Something went wrong, please try after some time" })
                 }
-                resp.send({user,auth:token}); // Send the user details if found
-            })            
-            
+                resp.send({ user, auth: token }); // Send the user details if found
+            })
+
         } else {
             resp.send({ result: "User not found" }); // Send error message if not found
         }
@@ -91,7 +91,7 @@ app.put("/product/:id", async (req, resp) => {
 });
 
 // Endpoint for searching products by a key provided in the URL parameter
-app.get("/search/:key",verifyToken, async (req, resp) => {
+app.get("/search/:key", async (req, resp) => {
     // Use the 'Product' model to search the database
     // The query uses the '$or' operator to match the 'name' field
     // The '$regex' operator performs a case-sensitive pattern match with the key
@@ -101,11 +101,11 @@ app.get("/search/:key",verifyToken, async (req, resp) => {
             {
                 name: { $regex: req.params.key },
             },
-            { 
-                company: { $regex: req.params.key } 
+            {
+                company: { $regex: req.params.key }
             },
-            { 
-                category: { $regex: req.params.key } 
+            {
+                category: { $regex: req.params.key }
             }
         ],
     });
@@ -115,25 +115,25 @@ app.get("/search/:key",verifyToken, async (req, resp) => {
 });
 
 
-function verifyToken(req,resp,next){
+function verifyToken(req, resp, next) {
     console.warn(req.headers['authorization'])
     let token = req.headers['authorization'];
-    if(token){
+    if (token) {
         token = token.split(' ')[1];
-        Jwt.verify(token, jwtKey,(err, valid)=>{
+        Jwt.verify(token, jwtKey, (err, valid) => {
 
-            if(err){
+            if (err) {
                 resp.send("Please provide a valid token")
             }
-            else{
+            else {
                 next();
             }
 
         })
 
     }
-    else{
-        resp.status(403).send({result:'Please provide a token'})
+    else {
+        resp.status(403).send({ result: 'Please provide a token' })
     }
     next();
 }
