@@ -107,6 +107,15 @@
   padding: 5px;
 }
 
+.search-product-box {
+  width: 40;
+  margin: 20px;
+  height: 30px;
+  padding-left: 30px;
+  border: solid;
+  color: skyblue;
+}
+
 
 /* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
