@@ -11,7 +11,7 @@ const UpdateProduct = () => {
     useEffect(() => {
         const getProductDetails = async () => {
             console.warn(params);
-            let result = await fetch(`http://localhost:5000/product/${params.id}`);
+            let result = await fetch(`http://localhost:3000/product/${params.id}`);
             result = await result.json();
             console.warn(result);
             updateName(result.name);
